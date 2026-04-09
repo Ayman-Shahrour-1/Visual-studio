@@ -1,0 +1,176 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Ayman Shahrour | Nexus";
+}
+
+<div class="viewport-wrapper">
+    <div class="orb"></div>
+
+    <div class="glass-panel">
+        <h1 id="shimmer-name">AYMAN SHAHROUR</h1>
+        
+        <div class="status-bar">
+            <span class="pulse-dot"></span> SYSTEM ONLINE // PORTFOLIO_v2.0
+        </div>
+
+        <hr class="divider" />
+
+        <div class="video-frame">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/09R8_2nJtjg?si=n4eMrb1EAmRzg1DL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>        </div>
+
+        <p class="description">
+            Pushing the boundaries of ASP.NET Core with custom interactive layers.
+        </p>
+    </div>
+</div>
+
+<style>
+    :root {
+        --neon-blue: #00f2ff;
+        --neon-purple: #bc13fe;
+        --glass: rgba(255, 255, 255, 0.05);
+    }
+
+    body {
+        background: #050505;
+        color: white;
+        font-family: 'Orbitron', sans-serif; /* A futuristic font look */
+        margin: 0;
+        overflow-x: hidden;
+    }
+
+    .viewport-wrapper {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(circle at center, #111 0%, #000 100%);
+    }
+
+    /* Floating background orb */
+    .orb {
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: linear-gradient(var(--neon-blue), var(--neon-purple));
+        filter: blur(100px);
+        opacity: 0.15;
+        z-index: 0;
+        animation: drift 20s infinite alternate;
+    }
+
+    .glass-panel {
+        position: relative;
+        z-index: 1;
+        background: var(--glass);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 3rem;
+        border-radius: 24px;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        text-align: center;
+        max-width: 900px;
+        width: 90%;
+    }
+
+    #shimmer-name {
+        font-size: 4rem;
+        font-weight: 900;
+        margin: 0;
+        background: linear-gradient(90deg, #fff, var(--neon-blue), #fff);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: 8px;
+    }
+
+    .status-bar {
+        font-size: 0.8rem;
+        letter-spacing: 3px;
+        color: var(--neon-blue);
+        margin-top: 10px;
+    }
+
+    .pulse-dot {
+        height: 8px;
+        width: 8px;
+        background-color: var(--neon-blue);
+        border-radius: 50%;
+        display: inline-block;
+        animation: blink 1.5s infinite;
+    }
+
+    .divider {
+        border: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        margin: 2rem 0;
+    }
+
+    .video-frame {
+        border-radius: 12px;
+        overflow: hidden;
+        aspect-ratio: 16 / 9;
+        border: 1px solid rgba(0, 242, 255, 0.3);
+        box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+    }
+
+    .video-frame iframe {
+        width: 100%;
+        height: 100%;
+    }
+
+    .description {
+        margin-top: 20px;
+        font-style: italic;
+        opacity: 0.6;
+    }
+
+    @@keyframes drift {
+        from { transform: translate(-20%, -20%); }
+        to { transform: translate(20%, 20%); }
+    }
+
+    @@keyframes blink {
+        0% { opacity: 1; }
+        50% { opacity: 0.3; }
+        100% { opacity: 1; }
+    }
+</style>
+
+<script>
+    const title = document.getElementById('shimmer-name');
+    let offset = 0;
+    let floatY = 0;
+    let angle = 0;
+
+    function coreAnimation() {
+        // 1. Shimmer effect (moves the background gradient)
+        offset += 1.5;
+        title.style.backgroundPosition = `${offset}% center`;
+
+        // 2. Floating motion
+        angle += 0.05;
+        floatY = Math.sin(angle) * 10; // Moves up and down by 10px
+        
+        // 3. Subtle rotation/tilt
+        let tilt = Math.cos(angle) * 2;
+
+        title.style.transform = `translateY(${floatY}px) rotate(${tilt}deg)`;
+
+        requestAnimationFrame(coreAnimation);
+    }
+
+    // Start the animation
+    coreAnimation();
+
+    // Add a "Glitch" effect on hover
+    title.addEventListener('mouseover', () => {
+        title.style.textShadow = "2px 2px #ff00c1, -2px -2px #00fff9";
+    });
+
+    title.addEventListener('mouseout', () => {
+        title.style.textShadow = "none";
+    });
+</script>
